@@ -1,0 +1,68 @@
+{{>head}}
+
+<body>
+    {{>navbar}}
+    {{>form}}
+    <section class="section">
+        <div class="heading">DELUX ROOM</div>
+        <div class="main-container">
+            {{#each DetailsA}}
+            <div class="room-container">
+                <img class="room-image" src="{{this.imageUrl}}" alt="Room 1">
+                <div class="container-2">
+                    <div class="type-room">{{this.roomName}}</div>
+                    <div class="cost">${{this.cost}} per night</div>
+                </div>
+
+                <div class="container-2">
+                    <div class="rating">&#9733; &#9733; &#9733; &#9734; &#9734;</div>
+                    <a href="#" class="book-now-btn" id="bookNowBtn" onclick="showBookingForm()">Book Now</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="heading">LUXURY ROOMS</div>
+        <div class="main-container">
+            {{#each DetailsB}}
+            <div class="room-container">
+                <img class="room-image" src="{{this.imageUrl}}" alt="Room 1">
+                <div class="container-2">
+                    <div class="type-room">{{this.roomName}}</div>
+                    <div class="cost">${{this.cost}} per night</div>
+                </div>
+
+                <div class="container-2">
+                    <div class="rating">&#9733; &#9733; &#9733; &#9734; &#9734;</div>
+                    <a href="#" class="book-now-btn" id="bookNowBtn" onclick="showBookingForm()">Book Now</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="heading">CLASSIC ROOMS</div>
+        <div class="main-container">
+            {{#each DetailsC}}
+            <div class="room-container">
+                <img class="room-image" src="{{this.imageUrl}}" alt="Room 1">
+                <div class="container-2">
+                    <div class="type-room">{{this.roomName}}</div>
+                    <div class="cost">${{this.cost}}per night</div>
+                </div>
+
+                <div class="container-2">
+                    <div class="rating">&#9733; &#9733; &#9733; &#9734; &#9734;</div>
+                    <a href="#" class="book-now-btn" id="bookNowBtn" onclick="showBookingForm()">Book Now</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+
+    <script src="../static/js/form.js"></script>
+</body>
+</html>

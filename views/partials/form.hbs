@@ -1,0 +1,48 @@
+<div class="form-body" id="form-body-id">
+    <div class="form-container" id="editForm">
+        <button class="close-button" id="close-form" onclick="hideBookingForm()">X</button>
+        <h1>Booking Form</h1>
+        <div class="booking-form">
+            <form action="/bookings" method="POST">
+                <label for="name" id="name-label">Name:</label>
+                <div class="items_form">
+                    <input type="text" id="name" name="name" placeholder="Enter you full name" required>
+                </div>
+
+                <label for="email">Email:</label>
+                <div class="items_form">
+                    <input type="email" id="email" name="email" placeholder="Enter you email" required>
+                </div>
+
+                <label for="number">People:</label>
+                <div class="items_form">
+                    <input type="number" id="number" name="number" placeholder="Enter number of people" required>
+                </div>
+
+                <label for="roomType">Room Type:</label>
+                <div class="items_form">
+                    <select id="roomType" name="roomType">
+                        <option value="">Please select the type of room</option>
+                        <option value="DR">DR</option>
+                        <option value="LR">LR</option>
+                        <option value="SR">SR</option>
+                    </select>
+                </div>
+
+                <label for="checkin">Check-in Time:</label>
+                <div class="items_form">
+                    <input type="datetime-local" id="checkin" name="checkin" required>
+                </div>
+
+                <label for="checkout">Check-out Time:</label>
+                <div class="items_form">
+                    <input type="datetime-local" id="checkout" name="checkout" required>
+                </div>
+
+                <div class="items_form">
+                    <button type="submit" id="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

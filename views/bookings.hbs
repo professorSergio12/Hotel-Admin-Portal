@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link rel="stylesheet" href="../static/css/booking-style.css">
+    <link rel="stylesheet" href="../static/css/form.css">
+    <link rel="stylesheet" href="../static/css/nav-style.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+
+<body>
+    {{>navbar}}
+
+    {{!-- Forms --}}
+    <section class="form-body" id="edit-form">
+
+    </section>
+
+    {{!-- Filter Section --}}
+    <div class="booking-main-container">
+        <form id="main-form-booking">
+            <label for="startDate">Start Date:</label>
+            <div class="booking-items">
+                <input type="date" id="startDate" name="startDate">
+            </div>
+
+            <label for="endDate">End Date:</label>
+            <div class="booking-items">
+                <input type="date" id="endDate" name="endDate">
+            </div>
+
+            <label for="roomType">Room Type:</label>
+            <div class="booking-items">
+                <select id="roomType" name="roomType">
+                    <option value="ALL">ALL</option>
+                    <option value="DR">DR</option>
+                    <option value="LR">LR</option>
+                    <option value="SR">SR</option>
+                </select>
+            </div>
+
+            <div class="booking-items">
+                <button type="button" id="submit-form" onclick="filterData()">Filter</button>
+                <button type="reset" id="reset">Reset</button>
+            </div>
+        </form>
+
+        <div class="booking-details" id="booking-id">
+            {{#each allBookings}}
+            <div class="section-booking-1">
+                <h3>Booking details</h3>
+                <div class="related-details">
+                    <div class="email"> <strong>Email:</strong> {{this.email}}</div>
+                    <div class="guest-name"><strong>Guest Name:</strong> {{this.name}}</div>
+                    <div class="duration"><strong>Duration:</strong> {{this.duration}}</div>
+                    <div class="amount"><strong>Amount:</strong> ₹{{this.amount}}</div>
+                    <div class="checkIn"><strong>Check-In:</strong> {{this.displayDatein}}</div>
+                    <div class="checkOut"><strong>Check-Out:</strong> {{this.displayDateout}}</div>
+                    <div class="booking-setting">
+                        <button type="submit" id="submit-btn" onclick=deleteTemplate("{{this.email}}")>Delete</button>
+                        <button type="reset" id="reset-btn" onclick=editTemplate("{{this.email}}")>Edit</button>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+
+    {{!-- Client slide scripting --}}
+    <script>
+        async function filterData() {
+            console.log('Filter data function called');
+            const startDate = document.getElementById("startDate").value;
+            //console.log(startDate);
+            const endDate = document.getElementById("endDate").value;
+            //console.log(endDate);
+            const roomType = document.getElementById("roomType").value;
+            // console.log(roomType);
+
+            const response = await fetch(`/filter/submit?startDate=${startDate}&endDate=${endDate}&roomType=${roomType}`);
+            const data = await response.json();
+            //console.log(data);
+
+            const bookingD = document.getElementById('booking-id');
+            bookingD.innerHTML = '';
+
+            data.forEach(bookings => {
+                bookingD.innerHTML += `<div class="section-booking-1">
+                <h3>Booking details</h3>
+                <div class="related-details">
+                    <div class="email"> <strong>Email:</strong> ${bookings.email}</div>
+                    <div class="guest-name"><strong>Guest Name:</strong> ${bookings.name}</div>
+                    <div class="duration"><strong>Duration:</strong> ${bookings.duration}</div>
+                    <div class="amount"><strong>Amount:</strong> ₹${bookings.amount}</div>
+                    <div class="checkIn"><strong>Check-In:</strong> ${bookings.displayDatein}</div>
+                    <div class="checkOut"><strong>Check-Out:</strong> ${bookings.displayDateout}</div>
+                    <div class="booking-setting">
+                        <button type="submit" id="submit-btn">Delete</button>
+                        <button type="reset" id="reset-btn">Edit</button>
+                    </div>
+                </div>
+            </div>`
+            })
+        }
+
+        async function deleteTemplate(email) {
+            const response = await fetch(`/amounts?email=${email}`);
+            const data = await response.json();
+            //console.log(data);
+            const currentDate = new Date();
+            const startDate = new Date(data[0].checkin);
+
+            const durationInMiliseconds = startDate.getTime() - currentDate.getTime();
+            const durationInHours = Math.ceil((durationInMiliseconds) / (1000 * 60 * 60));
+            const cost = data[0].amount;
+
+            if (durationInHours > 48) {
+
+                const flag = window.confirm(`Do you really want to cancel your bookings? You will get a refund of ₹${cost}`);
+                if (flag) {
+                    fetch(`/bookings-delete?email=${email}`);
+                    window.alert("Your bookings has been cancelled.");
+                }
+                else {
+                    window.alert("Your bookings has not been cancelled");
+                }
+            }
+            else if (durationInHours < 48 && durationInHours > 24) {
+                const refund = (cost * 50) / 100;
+                const flag = window.confirm(`Do you really want to cancel your bookings? You will get a refund of ₹${refund}`);
+                if (flag) {
+                    fetch(`/bookings-delete?email=${email}`);
+                    window.alert("Your bookings has been cancelled.");
+                }
+                else {
+                    window.alert("Your bookings has not been cancelled");
+                }
+            }
+            else {
+                const flag = window.confirm(`Do you really want to cancel your bookings? You will not get a refund.`);
+                if (flag) {
+                    fetch(`/bookings-delete?email=${email}`);
+                    window.alert("Your bookings has been cancelled.");
+                }
+                else {
+                    window.alert("Your bookings has not been cancelled");
+                }
+
+            }
+            window.location.reload(true);
+        }
+
+        async function editTemplate(email) {
+            const editForm = document.getElementById("edit-form");
+            console.log(editForm);
+            const response = await fetch(`/amounts?email=${email}`);
+            const data = await response.json();
+            console.log(data);
+            editForm.innerHTML += `
+            <div class="form-container" id="editForm">
+        <button class="close-button" id="close-form" onclick="hideForm()">X</button>
+        <h1>Booking Form</h1>
+        <div class="booking-form">
+            <form action="/update" method="POST">
+                <label for="name" id="name-label">Name:</label>
+                <div class="items_form">
+                    <input type="text" id="name" name="name" value="${data[0].name}">
+                </div>
+
+                <label for="email">Email:</label>
+                <div class="items_form">
+                    <input type="email" id="email" name="email" value="${data[0].email}">
+                </div>
+
+                <label for="number">People:</label>
+                <div class="items_form">
+                    <input type="number" id="number" name="number" value="${data[0].number}">
+                </div>
+
+                <label for="roomType">Room Type:</label>
+                <div class="items_form">
+                    <select id="roomType" name="roomType">
+                        <option value="">Please select the type of room</option>
+                        <option value="DR">DR</option>
+                        <option value="LR">LR</option>
+                        <option value="SR">SR</option>
+                    </select>
+                </div>
+
+                <label for="checkin">Check-in Time:</label>
+                <div class="items_form">
+                    <input type="datetime-local" id="checkin" name="checkin" value="${data[0].checkin}">
+                </div>
+
+                <label for="checkout">Check-out Time:</label>
+                <div class="items_form">
+                    <input type="datetime-local" id="checkout" name="checkout" value="${data[0].checkout}">
+                </div>
+
+                <div class="items_form">
+                    <button type="submit" id="submit" onclick = "closeForm()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>`
+            showForm();
+        }
+
+        function delay(milliseconds) {
+            return new Promise(resolve => {
+                setTimeout(resolve, milliseconds);
+            });
+        }
+
+        function showForm() {
+            var overlay = document.getElementById("edit-form");
+            overlay.style.display = 'flex';
+
+        }
+
+        async function closeForm() {
+            await delay(100);
+            var overlay = document.getElementById("edit-form");
+            overlay.style.display = "none";
+            overlay.innerHTML += '';
+            window.location.reload(true);
+        }
+    </script>
+    <script src="../static/js/form.js"></script>
+</body>
+
+</html>
