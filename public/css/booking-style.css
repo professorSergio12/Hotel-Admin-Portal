@@ -1,0 +1,150 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(193, 163, 207);
+}
+
+.booking-main-container {
+    height: 20rem;
+    row-gap: 2rem;
+    /* height:100vh; */
+}
+
+#main-form-booking {
+    display: grid;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    row-gap: 0.3rem;
+    padding: 30px 0px 0px 30px;
+}
+
+.booking-items {
+    width: 52rem;
+    /* border: 2px solid black; */
+}
+
+label[for="startDate"],
+label[for="endDate"],
+label[for="roomT"] {
+    font-size: 1.1rem;
+}
+
+#startDate,
+#endDate,
+select[name="roomType"] {
+    width: 100%;
+    padding: 5px;
+}
+
+
+/* Button of booking  */
+#submit-form {
+    padding: 6px 10px 6px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(12, 126, 12);
+    color: white;
+    border: none;
+    text-align: center;
+}
+
+#reset {
+    padding: 6px 10px 6px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    text-align: center;
+}
+
+#submit:hover {
+    background-color: rgb(16, 235, 16);
+    color: rgb(114, 105, 105);
+}
+
+#reset:hover {
+    background-color: rgb(194, 76, 95);
+    color: rgb(31, 29, 29);
+}
+
+
+/* Booking data coming from backend  css*/
+.booking-details {
+    display: grid;
+    grid-gap: 10px;
+    padding: 30px 25px 20px 60px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.section-booking-1 {
+    width: 260px;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    background-color: rgb(209, 195, 195);
+}
+
+.section-booking-1 h3 {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.related-details {
+    padding: 5px 8px 8px 13px;
+}
+
+.related-details div {
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
+
+
+/* Button of booking details */
+.booking-setting {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, 0.2fr);
+    /* padding-right: 20px; */
+}
+
+#submit-btn {
+    padding: 6px 10px 6px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    text-align: center;
+}
+
+#reset-btn {
+    padding: 6px 15px 6px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(12, 126, 12);
+    color: white;
+    border: none;
+    text-align: center;
+}
+
+#submit-btn:hover {
+    background-color: rgb(194, 76, 95);
+    color: rgb(114, 105, 105);
+}
+
+#reset-btn:hover {
+    color: rgb(31, 29, 29);
+    background-color: rgb(16, 235, 16);
+}

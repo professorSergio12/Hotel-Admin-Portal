@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+}
+
+.section {
+    margin: 20px 0px 10px 0px;
+}
+
+.main-container {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    margin: 10px 0px 10px 0px;
+}
+
+.heading {
+    font-size: 20px;
+    background-color: rgb(236, 127, 173);
+    padding: 6px;
+    text-align: center;
+}
+
+.room-container {
+    /* max-width: 300px; */
+    width: 20%;
+    margin: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid rgb(230, 193, 193);
+}
+
+.room-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.container-2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rating {
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.type-room {
+    margin-bottom: 5px;
+}
+
+.cost {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.book-now-btn {
+    padding: 10px;
+    /* width: 100%; */
+    text-align: center;
+    background-color: #4caf50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.book-now-btn:hover {
+    transform: scale(1.1);
+}

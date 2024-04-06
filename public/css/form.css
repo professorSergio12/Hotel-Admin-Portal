@@ -1,0 +1,113 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Main body  */
+.form-body {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Body of form */
+.form-container {
+    position: relative;
+    width: 700px;
+    height: 600px;
+    padding: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#form-set {
+    margin-top: 25px;
+}
+
+.items_form {
+    height: 100%;
+    width: 100%;
+    padding-top: 5px;
+}
+
+label[for="name"],
+label[for="email"],
+label[for="number"],
+label[for="roomType"],
+label[for="checkin"],
+label[for="checkout"] {
+    font-size: 18px;
+}
+
+#name,
+#email,
+#number,
+#checkin,
+#checkout {
+    margin-bottom: 15px;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+}
+
+#name {
+    text-transform: capitalize;
+}
+
+.items_form input::placeholder {
+    color: #999;
+}
+
+select[name="roomType"] {
+    margin-bottom: 15px;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+}
+
+/* Buttons on form */
+#submit {
+    height: 100%;
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+    background-color: rgb(51, 209, 59);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#submit:hover {
+    background-color: rgb(6, 82, 10)
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ccc;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: white;
+    font-size: 18px;
+}
+
+.close-button:hover {
+    background-color: rgb(187, 206, 188);
+}
